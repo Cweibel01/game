@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style>
+        .card{width:140px;height:140px}
+    </style>
+    <script>
+        var A1 = false;
+        function flipA1() {
+            if (A1) {
+                document.getElementById("A1").src = "http://images.penguinmagic.com/images/products/original/8006b.";
+            }
+            else {
+                document.getElementById("A1").src = "http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg";
+            }
+            A1 = !A1
+            check();
+        }
+        var b1 = true;
+        function flipB1(){
+            if(b1){
+                document.getElementById("B1").src="http://vignette4.wikia.nocookie.net/filthy-frank/images/1/13/Trill.png/revision/latest?cb=20140424104015";}
+            else{
+                document.getElementById("B1").src="http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg";
+            }
+            b1 = !b1;
+
+
+        }
+
+
+        var a2 = true;
+        function flipA2(){
+            if(a2){
+                document.getElementById("A2").src="http://vignette1.wikia.nocookie.net/filthy-frank/images/e/ea/Salamander_Man.png/revision/20150121035838";}
+
+            else{
+
+                document.getElementById("A2").src="http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg";
+            }
+            a2 = !a2;
+        }
+
+        var b2 = true;
+        function flipB2(){
+            if(b2){
+                document.getElementById("B2").src="https://t2.rbxcdn.com/243581247dcd95b786c73a5a7c61bcde";}
+
+            else{
+
+                document.getElementById("B2").src="http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg";
+            }
+            b2 = !b2;
+
+
+        }
+        var A3 = true;
+        function flipA3(){
+            if(A3){
+                document.getElementById("A3").src="http://vignette1.wikia.nocookie.net/filthy-frank/images/e/ea/Salamander_Man.png/revision/20150121035838";}
+            else{
+                document.getElementById("A3").src="http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg";
+            }
+            A3 = !A3;
+        }
+
+        var b3 = true;
+        function flipB3(){
+            if(b3){
+                document.getElementById("B3").src="http://ih1.redbubble.net/image.190498626.2967/sticker,375x360.png";}
+            else{
+                document.getElementById("B3").src="http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg";
+            }
+            b3 = !b3;
+
+
+        }
+
+        var c1 = true;
+        function flipc1(){
+            if(c1){
+                document.getElementById("c1").src="http://ih1.redbubble.net/image.190498626.2967/sticker,375x360.png";}
+            else{
+                document.getElementById("c1").src="http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg";
+            }
+            c1 = !c1;
+        }
+
+        var C2 = false
+        function flipC2(){
+            if(C2){
+                document.getElementById("C2").src="http://images.penguinmagic.com/images/products/original/8006b.jpg";}
+            else{
+                document.getElementById("C2").src="http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg";
+            }
+            C2 = !C2;
+            check()
+
+
+        }
+        var C3 = true;
+        function flipC3(){
+            if (!C3) {
+                document.getElementById("C3").src = "image.shutterstock.com/z/stock-vector-lol-87079871.jpg";
+            } else {
+                document.getElementById("C3").src = "http://mediad.publicbroadcasting.net/p/kuow/files/201601/reveal.png";
+            }
+            C3 = !C3;
+            setTimeout(flipAll, 1000);
+        }
+
+
+        function flipAll() {
+            flipC2();
+            flipc1();
+            flipB3();
+            flipB2();
+            flipB1();
+            flipA3();
+            flipA2();
+            flipA1();
+            setTimeout(reflipall, 1000)
+        }
+        function reflipall() {
+            flipC2();
+            flipc1();
+            flipB3();
+            flipB2();
+            flipB1();
+            flipA3();
+            flipA2();
+            flipA1();
+            document.getElementById("C3").remove();
+        }
+
+
+    </script>
+    <script>
+        function check(){
+            if ((A1=true)&&(C2=true)) {
+                document.getElementById("A1").remove();
+                document.getElementById("C2").remove();
+            }}
+    </script>
+</head>
+
+
+
+
+<body>
+<div class="row">
+    <div class="col-md-4" onclick="flipA1()"><img  class="card" id="A1" src="http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg"></div>
+    <div class="col-md-4" onclick="flipA2()"><img  class="card" id="A2" src="http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg"></div>
+    <div class="col-md-4" onclick="flipA3()"><img  class="card" id="A3" src="http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-4" onclick="flipB1()"><img  class="card" id="B1" src="http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg"></div>
+    <div class="col-md-4" onclick="flipB2()"><img  class="card" id="B2" src="http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg"></div>
+    <div class="col-md-4" onclick="flipB3()"><img  class="card" id="B3" src="http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-4" onclick="flipc1()"><img  class="card" id="c1" src="http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg"></div>
+    <div class="col-md-4" onclick="flipC2()"><img  class="card" id="C2" src="http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg"></div>
+    <div class="col-md-4" onclick="flipC3()"><img  class="card" id="C3" src="http://chetart.com/blog/wp-content/uploads/2012/05/playing-card-back.jpg"></div>
+</div>
+
+</body>
+</html>
+

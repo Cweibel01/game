@@ -1,0 +1,242 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Pink guy v Chin Chin</title>
+    <style>
+        body{background-color: #fff;}
+        #canvas {background-color: #fff;}
+    </style>
+    <script type="text/javascript">
+        var canvas;
+        var ctx;
+
+        var tank;
+        var tank2;
+
+        // /////////////////////////////////////////////////////////
+        // /////////Tank Object////////////////////////////////////
+
+        function Tank(xpos,ypos,speed,color) {
+            this.x= xpos;
+            this.y = ypos;
+            this.speed = speed;
+            this.direction=0;
+            this.health = 10;
+            this.angle = 0;
+            this.bullet = new Bullet(this.x,this.y,this.angle,this.speed);
+
+            this.draw = function() {
+                var  myImage = new Image(15, 15);
+                myImage.src = "243581247dcd95b786c73a5a7c61bcde.png";
+ctx.drawImage(myImage,this.x,this.y);
+                //ctx.fillStyle = color;
+                //ctx.fillRect(this.x,this.y,25,10);
+                this.bullet.draw();
+                ctx.fillStyle = '#000000';
+                ctx.strokeRect(0,0,canvas.width,canvas.height);
+            };
+
+            this.changeDirection = function(a) {
+                this.direction =a;};
+
+            this.move = function move(){
+                if(this.direction==1){
+                    this.x =this.x-this.speed;
+                }
+                // 1 is left
+
+                else if(this.direction==2){
+                    this.x =this.x+this.speed;
+                }
+                //2 is right
+
+                else if(this.direction==4){
+                    this.y =this.y+this.speed;
+                }
+                //3 is up
+
+                else if(this.direction==3){
+                    this.y =this.y-this.speed;
+                }
+                //4 is down
+            };
+
+            this.firetank = function(){
+                this.bullet = new Bullet(this.x,this.y,this.angle,this.speed);
+                this.bullet.fire();};
+
+            this.checkBullet = function(){
+
+                this.bullet.update(this.xpos,this.ypos);};
+
+        }///Ends Tank
+
+        // /////////////////////////////////////////////////////////
+        // /////////Bullet Object////////////////////////////////////
+
+        function Bullet(xpos,ypos,angle,tankspeed) {
+            this.xpos = xpos;
+            this.ypos = ypos;
+            this.angle = angle;
+            this.visible = 'false';
+            this.speed = tankspeed * 2;
+            this.bx = this.xpos;
+            this.by = this.ypos;
+            this.stepX = 0.0;
+            this.stepY  = 0.0;
+            this.col = '#800080';
+
+
+            this.fire = function() {
+                this.getSteps();
+                this.visible= 'true';};
+
+            this.getSteps = function(){
+                this.stepX = this.speed * Math.cos((this.angle+Math.PI)/180);
+                this.stepY = this.speed * Math.sin((this.angle+Math.PI)/180);
+            };
+
+            this.draw = function() {
+
+                ctx.fillStyle = this.col;
+                ctx.fillRect(this.bx,this.by,8,8);
+            };
+
+            this.getSpeed= function(){
+                return this.speed;
+            };
+
+
+            this.update = function(tankx,tanky){
+
+
+                if(this.visible=='true'){
+                    this.col = '61B50E';
+
+                    this.bx = this.bx + this.stepX;
+                    this.by = this.by + this.stepY
+
+                    if((this.by<0)||(this.by>canvas.height)||(this.bx<0)||(this.bx>canvas.width)){
+                        this.visible='false';}
+
+
+                }else{
+                    this.bx = tankx;
+                    this.by = tanky;}
+            };
+
+        }
+
+
+
+        function start() {
+            document.onkeydown=keyListenerDown;
+            document.onkeyup=keyListenerUp;
+            tank = new Tank(200,200,3,'#ff0088');
+            tank2 = new Tank(200,200,3,'#0000ff');
+            canvas = document.getElementById('canvas');
+            ctx = canvas.getContext('2d');
+            setInterval(drawTanks,15);  }
+
+        function drawTanks() {
+            ctx.clearRect (0, 0, canvas.width, canvas.height);
+            tank.checkBullet();
+            tank2.checkBullet();
+            tank.draw();
+            tank2.draw();
+        }
+
+        function keyListenerDown(e){
+            if(!e){
+                //for IE
+                e = window.event;
+            }
+            if(e.keyCode==37 ){
+
+                //FYI-keyCode 37 is left arrow
+                tank.changeDirection(1);} //1 is left
+            if(e.keyCode==39){
+                //FYI-keyCode 39 is right arrow
+                tank.changeDirection(2);} //2 is right
+            if(e.keyCode==38){
+                // FYI - keyCode 38 is up arrow,
+                tank.changeDirection(3);} //3 is up
+            if(e.keyCode==40){
+                // FYI - keyCode 40 is up arrow,
+                tank.changeDirection(4);} //4 is down
+
+            if(e.keyCode==65 ){
+                //FYI-keyCode 65 is a
+                tank2.changeDirection(1);} //1 is left
+            if(e.keyCode==83){
+                //FYI-keyCode 83 is s
+                tank2.changeDirection(2);} //2 is right
+            if(e.keyCode==87){
+                // FYI - keyCode 87 is up w,
+                tank2.changeDirection(3);} //3 is up
+            if(e.keyCode==90){
+                // FYI - keyCode 90 is up z,
+                tank2.changeDirection(4);} //4 is down
+            if(e.keyCode==66){
+                tank2.firetank();
+                // FYI - keyCode 66 is b,
+            }
+            if(e.keyCode==13){
+
+                // FYI - keyCode 13 is Enter,
+                tank.firetank();}
+
+            tank.move();
+            tank2.move();
+        }
+
+        function keyListenerUp(e){
+            if(!e){
+                //for IE
+                e = window.event;
+            }
+            if(e.keyCode==37 ){
+                //FYI-keyCode 37 is left arrow
+                tank.changeDirection(0);} //1 is left
+            if(e.keyCode==39){
+                //FYI-keyCode 39 is right arrow
+                tank.changeDirection(0);} //2 is right
+            if(e.keyCode==38){
+                // FYI - keyCode 38 is up arrow,
+                tank.changeDirection(0);} //3 is up
+            if(e.keyCode==40){
+                // FYI - keyCode 40 is up arrow,
+                tank.changeDirection(0);} //4 is down
+
+            if(e.keyCode==65 ){
+                //FYI-keyCode 65 is a
+                tank2.changeDirection(0); } //1 is left
+            if(e.keyCode==83){
+                //FYI-keyCode 83 is s
+                tank2.changeDirection(0);} //2 is right
+            if(e.keyCode==87){
+                // FYI - keyCode 87 is up w,
+                tank2.changeDirection(0);} //3 is up
+            if(e.keyCode==90){
+                // FYI - keyCode 90 is up z,
+                tank2.changeDirection(0);} //4 is down
+            tank.move();
+            tank2.move();
+
+
+        }
+
+
+    </script>
+
+</head>
+
+
+<body onload="start();">
+
+<canvas id="canvas" width="700" height="500"></canvas>
+
+</body>
+</html>
+
